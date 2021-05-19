@@ -17,7 +17,7 @@
  * @returns {string} John Smith
  */
 export const createFullName = (firstName, lastName) => {
-  /* Write your code here */
+  return `${firstName} ${lastName}`;
 };
 
 /**
@@ -28,8 +28,12 @@ export const createFullName = (firstName, lastName) => {
  * @param {number} number2 200
  * @returns {number} 100
  */
-export const findSmallestNumber = (/* Write the parameters here */) => {
-  /* Write your code here */
+export const findSmallestNumber = (number1, number2) => {
+  if(number1>number2) {
+    return number2
+  } else {
+    return number1
+  }
 };
 
 /**
@@ -40,8 +44,8 @@ export const findSmallestNumber = (/* Write the parameters here */) => {
  * @param {number} number2 6
  * @returns {number} 18
  */
-export const multiplyNumbers = (/* Write the parameters here */) => {
-  /* Write your code here */
+export const multiplyNumbers = (number1, number2) => {
+  return number1*number2
 };
 
 /* Intermediate Challenges */
@@ -57,7 +61,13 @@ export const multiplyNumbers = (/* Write the parameters here */) => {
  * @returns {string} "You got a new high score!" | "So close!" | "Better luck next time!"
  */
 export const checkIfNewHighScore = (score, highScore) => {
-  /* Write your code here */
+  if(score > highScore){
+    return "You got a new high score!"
+  } else if(score === highScore) {
+    return "So close!"
+  } else {
+    return "Better luck next time!"
+  }
 };
 
 /**
@@ -67,7 +77,8 @@ export const checkIfNewHighScore = (score, highScore) => {
  * @returns {string} "15 degrees celsius is 59 degrees fahrenheit"
  */
 export const celsiusToFahrenheit = (tempInCelsius) => {
-  /* Write your code here */
+  const tempinFahrenheit = (tempInCelsius * 9 / 5) +32;
+  return `${tempInCelsius} degrees celsius is ${tempinFahrenheit} degrees fahrenheit`
 };
 
 /**
@@ -80,7 +91,7 @@ export const celsiusToFahrenheit = (tempInCelsius) => {
  * @returns {number} 47450
  */
 export const calculateLifetimeSupply = (snickersPerDay, age, maxAge) => {
-  /* Write your code here */
+  return (maxAge-age) * 365 * snickersPerDay
 };
 
 /* Advanced Challenges */
@@ -100,7 +111,29 @@ export const calculateLifetimeSupply = (snickersPerDay, age, maxAge) => {
  * @returns {string} A - F | Score unavailable
  */
 export const getGrade = (score) => {
-  /* Write your code here */
+  switch(true) {
+    case score < 0 || score > 100 || typeof score != "number":
+      return "Score unavailable";
+      break;
+    case score >= 0 && score <= 39:
+      return "F";
+      break;
+    case score >= 40 && score <= 49:
+      return "E";
+      break;
+    case score >= 50 && score <= 59:
+      return "D";
+      break;
+    case score >= 60 && score <= 69:
+      return "C";
+      break;
+    case score >= 70 && score <= 79:
+      return "B";
+      break;
+    case score >= 80 && score <= 100:
+      return "A";
+      break;
+  }
 };
 
 /**
@@ -110,7 +143,7 @@ export const getGrade = (score) => {
  * @returns {number} 28.27
  */
 export const calculateAreaOfCirlce = (radius) => {
-  /* Write your code here */
+  return Number((Math.PI * Math.pow(radius, 2)).toFixed(2));
 };
 
 /* Expert Challenge */
@@ -131,5 +164,28 @@ export const calculateAreaOfCirlce = (radius) => {
  * @param {string} name John
  */
 export const getStudentSummary = (score, name) => {
-  /* Write your code here */
+  const letterScore = getGrade(score);
+  switch(letterScore) {
+    case "Score unavailable":
+      return `My apologies ${name}, there's been an error in processing your grade.`;
+      break;
+    case "F":
+      return `Sorry ${name}. You achieved a grade of ${letterScore}. There's always next year.`;
+      break;
+    case "E":
+      return `Too bad ${name}. You achieved a grade of ${letterScore}.`;
+      break;
+    case "D":
+      return `That's okay ${name}. You achieved a grade of ${letterScore}.`;
+      break;
+    case "C":
+      return `Nicely done ${name}! You achieved a grade of ${letterScore}.`;
+      break;
+    case "B":
+      return `Well done ${name}! You achieved a grade of ${letterScore}.`;
+      break;
+    case "A":
+      return `Congratulations ${name}! You achieved a grade of ${letterScore}.`;
+      break;
+  }
 };
