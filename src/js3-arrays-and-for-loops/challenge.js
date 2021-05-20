@@ -98,7 +98,8 @@ export const moveFirstAndLastItems = (itemsArr) => {
  */
 
 export const removeEvenNumbers = (numberArr) => {
-  return;
+  let newNumberArr = [...numberArr];
+  return newNumberArr.filter(number => (number % 2) != 0);
 };
 
 /**
@@ -114,7 +115,12 @@ export const removeEvenNumbers = (numberArr) => {
  */
 
 export const generateAverage = (numberArr) => {
-  return;
+  let total = 0;
+  for(let i = 0; i<numberArr.length; i++){
+    total += numberArr[i]
+  };
+  const average = total/numberArr.length;
+  return Math.round(average) || 0;
 };
 
 /**
@@ -125,7 +131,11 @@ export const generateAverage = (numberArr) => {
  */
 
 export const reverseOrder = (toReverseArr) => {
-  return;
+  let reversedArr = [];
+  for(let i=0; i<toReverseArr.length; i++){
+    reversedArr.unshift(toReverseArr[i])
+  };
+  return reversedArr;
 };
 
 /**
@@ -147,7 +157,15 @@ export const reverseOrder = (toReverseArr) => {
  */
 
 export const generateHighscores = (playersArr, scoresArr) => {
-  return;
+  if(playersArr.length !== scoresArr.length || !playersArr.length || !scoresArr.length) {
+    return "invalid inputs"
+  } else {
+  let resultsArray = [];
+  for(let i = 0; i<playersArr.length; i++) {
+    resultsArray.push(`P:${i+1} ${playersArr[i]} scored ${scoresArr[i]}`)
+  };
+  return resultsArray;
+  }
 };
 
 /**
@@ -177,5 +195,15 @@ export const generateHighscores = (playersArr, scoresArr) => {
 // };
 
 export const encryptString = (toEncrypt) => {
-  return;
+  const pivot = [[], [], []];
+  for (let i = 0; i < toEncrypt.length; i++) {
+    pivot[i % 3].push(toEncrypt.charAt(i));
+  }
+  let str = "";
+  for (let i = 0; i < pivot.length; i++) {
+    for (let j = 0; j < pivot[i].length; j++) {
+      str += pivot[i][j];
+    }
+  }
+  return str;
 };
