@@ -22,7 +22,8 @@
  */
 
 export const removeFalseValues = (booleanArr) => {
-  return;
+ const trueArr = booleanArr.filter((boolean) => boolean === true);
+  return trueArr;
 };
 
 /**
@@ -34,7 +35,11 @@ export const removeFalseValues = (booleanArr) => {
  */
 
 export const createPercentageList = (numbersArr) => {
-  return;
+  const percentageArr = numbersArr.map((number) => {
+   let percentage = (number*100).toString();
+   return `${percentage}%`;
+  });
+  return percentageArr;
 };
 
 /**
@@ -47,7 +52,8 @@ export const createPercentageList = (numbersArr) => {
  */
 
 export const createListOfPoessessions = (possessionsArr, name) => {
-  return;
+  const namePrefixArr = possessionsArr.map((possession) => `${name} ${possession}`);
+  return namePrefixArr;
 };
 
 /**
@@ -72,7 +78,9 @@ export const createListOfPoessessions = (possessionsArr, name) => {
  */
 
 export const convertStringToNumbersArray = (numberString) => {
-  return;
+  const numbersAsStringsArray = numberString.split("+");
+  const numberArray = numbersAsStringsArray.map((number) => Number(number));
+  return numberArray;
 };
 
 /**
@@ -84,7 +92,15 @@ export const convertStringToNumbersArray = (numberString) => {
  */
 
 export const createOddEvenArray = (numberString) => {
-  return;
+  const numbersArray = numberString.split("+");
+  const oddEvenArray = numbersArray.map((number) => {
+    if(number%2 === 0){
+      return "even"
+    } else {
+      return "odd"
+    };
+  })
+  return oddEvenArray;
 };
 
 /**
@@ -97,7 +113,8 @@ export const createOddEvenArray = (numberString) => {
  */
 
 export const filterBooksBySearch = (booksArr, searchTerm) => {
-  return;
+  const filteredArr = booksArr.filter((book) => book.includes(searchTerm));
+  return filteredArr;
 };
 
 /**
@@ -117,7 +134,7 @@ export const filterBooksBySearch = (booksArr, searchTerm) => {
  */
 
 export const formatStringArray = (stringArr) => {
-  const cleanedArr = stringArr.forEach((string) => {
+  const cleanedArr = stringArr.map((string) => {
     const cleanStr = string.trim().toLowerCase();
     return cleanStr;
   });
@@ -143,7 +160,17 @@ export const formatStringArray = (stringArr) => {
  */
 
 export const formatString = (string) => {
-  return;
+  const cleanStr = string.replace(/[^\w]|[\s\d]/gi, "");
+  const cleanArr = cleanStr.split("");
+  let formattedArr = [];
+  for(let i=0; i<cleanArr.length; i++){
+    if(i%2 != 0){
+      formattedArr.push(cleanArr[i].toLowerCase())
+    } else {
+      formattedArr.push(cleanArr[i].toUpperCase())
+    }
+  };
+  return formattedArr;
 };
 
 /**
@@ -170,5 +197,17 @@ export const formatString = (string) => {
  */
 
 export const fizzBuzz = (mixedArray) => {
-  return;
+  const cleanedArray = mixedArray.filter((item) => item > 0 || Number(item) > 0);
+  const fizzBuzzArray = cleanedArray.map((number) => {
+    if(number%3 === 0 && number%5 === 0){
+      return "FizzBuzz"
+    } else if(number%5 ===0) {
+      return "Buzz"
+    } else if(number%3 ===0) {
+      return "Fizz"
+    } else {
+      return number.toString()
+    }
+  });
+  return fizzBuzzArray;
 };
