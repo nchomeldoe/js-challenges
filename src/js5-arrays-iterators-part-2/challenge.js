@@ -21,8 +21,9 @@
  * @return {number} 30
  */
 
-export const totalScoresArr = (scoresArr) => {
-  return;
+export const totalScoresArr = (numberArr) => {
+  let score = numberArr.reduce((accumulator, currentValue) => {return accumulator+currentValue});
+  return score;
 };
 
 /**
@@ -35,7 +36,13 @@ export const totalScoresArr = (scoresArr) => {
  */
 
 export const reverseString = (toReverse) => {
-  return;
+  const arrToReverse = toReverse.split("");
+  const reversedArr = [];
+  for(const item of arrToReverse) {
+    reversedArr.unshift(item);
+  };
+  const reversedStr = reversedArr.join("");
+  return reversedStr;
 };
 
 /**
@@ -43,12 +50,14 @@ export const reverseString = (toReverse) => {
  * Each character will need to be lowercase.
  * A to Z case insensitive.
  *
- * @param {string[]} charcterArr ["X", "B", "B", "b", "g", "l", "n", "x"]
+ * @param {string[]} characterArr ["X", "B", "B", "b", "g", "l", "n", "x"]
  * @return {string[]} ["b", "b", "b", "g", "l", "n", "x", "x"]
  */
 
-export const sortCharactersAlphabetically = (charcterArr) => {
-  return;
+export const sortCharactersAlphabetically = (characterArr) => {
+  const lowerCaseArr = characterArr.map((character) => character.toLowerCase());
+  const sortedArr = lowerCaseArr.sort();
+  return lowerCaseArr;
 };
 
 /**
@@ -63,7 +72,8 @@ export const sortCharactersAlphabetically = (charcterArr) => {
  */
 
 export const sortNumbersHighToLow = (numberArr) => {
-  return;
+  numberArr.sort((a, b) => b-a);
+  return numberArr;
 };
 
 /**
@@ -94,7 +104,13 @@ export const checkItemInstock = (toCheck) => {
     "blueberry",
     "melon",
   ];
-  return;
+
+  if(stockList.includes(toCheck)) {
+    const index = stockList.indexOf(toCheck);
+    return `${toCheck} is instock, it is on aisle ${index}.`
+  } else {
+    return `Sorry ${toCheck} is not instock.`
+  };
 };
 
 /**
@@ -108,8 +124,21 @@ export const checkItemInstock = (toCheck) => {
  */
 
 export const checkPrimaryColours = (coloursArr) => {
-  return;
-};
+  const primaryColours = ["red", "blue", "yellow"];
+  const trueFalseArr = [];
+  coloursArr.forEach((colour) => {
+    if(primaryColours.includes(colour)) {
+      trueFalseArr.push(true)
+    } else {
+      trueFalseArr.push(false)
+    }
+  });
+  if(trueFalseArr.includes(false)) {
+    return false
+  } else {
+    return true
+  }
+  };
 
 /**
  * Advanced Challenges
@@ -125,7 +154,11 @@ export const checkPrimaryColours = (coloursArr) => {
  */
 
 export const checkStringPalindrome = (stringOne) => {
-  return;
+  if(stringOne.split("").reverse().join("") === stringOne){
+    return true
+  } else {
+  return false;
+  }
 };
 
 /**
@@ -139,7 +172,12 @@ export const checkStringPalindrome = (stringOne) => {
  */
 
 export const totalNestedScoresArr = (scoresArr) => {
-  return;
+  let totalScores = [];
+  scoresArr.forEach((nestedArray) => {
+    let total = nestedArray.reduce((a, b) => a+b);
+    totalScores.push(total)
+  })
+  return totalScores;
 };
 
 /**
@@ -171,6 +209,19 @@ export const totalNestedScoresArr = (scoresArr) => {
  * @return {string} "ertnyecpd"
  */
 
-export const encryptString = (toEncrypt) => {
-  return;
+ export const encryptString = (toEncrypt) => {
+  const encrypted = toEncrypt
+    .split("")
+    .reduce(
+      (total, current, index) => {
+        const remainder = index % 3;
+        total[remainder].push(current);
+        return total;
+      },
+      [[], [], []]
+    )
+    .flat()
+    .join("");
+    
+  return encrypted;
 };
