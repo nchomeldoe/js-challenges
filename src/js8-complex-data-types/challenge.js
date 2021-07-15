@@ -58,7 +58,8 @@ export const getNumberOfKeys = (object) => {
  * @returns {{name: string, price: number, hasFreeShipping: boolean, quantity: number}} The most expensive item in the shopping basket
  */
 export const findMostExpensiveItem = (shoppingBasketArr) => {
-  // Write code here
+  const shoppingBasketByHighestPrice = shoppingBasketArr.sort((a, b) => b.price - a.price )
+  return shoppingBasketByHighestPrice[0];
 };
 
 /**
@@ -77,7 +78,12 @@ export const findMostExpensiveItem = (shoppingBasketArr) => {
  * @returns {{name: string, price: number, hasFreeShipping: boolean, quantity: number, totalPrice: number}[]} A new array where each object has had a total price added to it
  */
 export const settotalPrice = (shoppingBasketArr) => {
-  // Write code here
+ const shoppingBasketArrWithTotal = shoppingBasketArr.map((item) => {
+   const newItem = {...item};
+   newItem.totalPrice = newItem.price * newItem.quantity;
+   return newItem
+ });
+ return shoppingBasketArrWithTotal
 };
 
 /**
@@ -87,7 +93,11 @@ export const settotalPrice = (shoppingBasketArr) => {
  * @returns {number} The total cost of the order
  */
 export const totalShoppingBasket = (shoppingBasketArr) => {
-  // Write code here
+  let number = 0;
+  shoppingBasketArr.forEach((item) => {
+    number += item.totalPrice
+  })
+  return number
 };
 
 /* Advanced Challenges */
@@ -100,7 +110,11 @@ export const totalShoppingBasket = (shoppingBasketArr) => {
  * @returns {{id: number, name: string, ingredients: string[], country: string}[]} An array of cleaned meal objects
  */
 export const getImportantKeys = (mealsArr) => {
-  // Write code here
+  const cleanedArr = mealsArr.map((meal) => {
+    const newMeal = { id: meal.id, name: meal.name, ingredients: meal.ingredients, country: meal.country };
+    return newMeal;
+  })
+  return cleanedArr;
 };
 
 /**
@@ -114,7 +128,17 @@ export const getImportantKeys = (mealsArr) => {
  * @returns {{id: number, name: string, ingredients: string[], country: string, isVegetarian: boolean, timeToCook: number}[]}
  */
 export const setImportantKeys = (mealsArr) => {
-  // Write code here
+  const checkedArr = mealsArr.map((meal) => {
+    const newMeal = {...meal};
+    if(!newMeal.isVegetarian) {
+      newMeal.isVegetarian = false
+    };
+    if(!newMeal.timeToCook) {
+      newMeal.timeToCook = 15
+    };
+    return newMeal;
+  })
+  return checkedArr;
 };
 
 /* Expert Challenge */
@@ -146,5 +170,22 @@ export const setImportantKeys = (mealsArr) => {
  * }[]} A Cleaned array of cocktail data
  */
 export const cleanCocktailResponseData = (cocktailData) => {
-  // Write code here
+  const cleanedCocktailData = cocktailData.map((cocktail) => {
+    const newCocktail = {...cocktail};
+    const cleanedCocktail = { };
+    cleanedCocktail.id = newCocktail.idDrink;
+    cleanedCocktail.drink = newCocktail.strDrink;
+    cleanedCocktail.category = newCocktail.strCategory;
+    cleanedCocktail.alcoholic = newCocktail.strAlcoholic;
+    cleanedCocktail.instructions = newCocktail.strInstructions;
+    cleanedCocktail.ingredients = [];
+    for (const key in newCocktail) {
+      const element = cocktail[key];
+      if(key.includes("Ingredient") && element) {
+        cleanedCocktail.ingredients.push(element)
+      }
+    }
+    return cleanedCocktail
+  })
+  return cleanedCocktailData
 };
