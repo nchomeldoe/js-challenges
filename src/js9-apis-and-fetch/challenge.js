@@ -18,7 +18,6 @@
  * @returns {{id: string, name: string, age: number, height: number, interests: string[], isEmployed: boolean}[]} The data from the API
  */
  export const getData = (url) => {
-   console.log('******************josh test -- in getDataFunc')
     return fetch(url)
       .then(res => res.json())
       .then((data) => {
@@ -181,5 +180,21 @@ export const setDescriptions = (url) => {
  * }[]}
  */
 export const setInterestDetails = (peopleUrl, interestsUrl) => {
-  // Your code here
+  return fetch(peopleUrl)
+    .then((res) => res.json())
+    .then((people) => {
+      return fetch(interestsUrl)
+      .then((res) => res.json())
+      .then((interests) => {
+        const peopleWithInterests = people.map((person) => {
+          const newPerson = {...person};
+            const newInterests = newPerson.interests.map((personsInterest) => {
+              return interests.find((interest) => interest.interest === personsInterest);
+            });
+            newPerson.interests = newInterests;
+            return newPerson;
+            });
+        return peopleWithInterests;
+      });
+    });
 };
